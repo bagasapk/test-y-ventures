@@ -8,7 +8,7 @@ const usePosts = () => {
   const postId = useAppSelector((s) => s.post.filter.postId);
   const dispatch = useAppDispatch();
 
-  const query = useGetPosts({ id: postId });
+  const query = useGetPosts(postId ? { id: postId } : undefined);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     dispatch(setFilterPostId(e.target.value));
