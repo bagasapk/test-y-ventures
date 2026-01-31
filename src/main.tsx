@@ -1,10 +1,20 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.tsx";
+import "./index.css";
+import { Provider } from "react-redux";
+import { store } from "./stores/stores.tsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-createRoot(document.getElementById('root')!).render(
+const client = new QueryClient({
+  defaultOptions: { queries: { refetchOnWindowFocus: false } },
+});
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
+    <QueryClientProvider client={client}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </QueryClientProvider>
   </StrictMode>,
-)
+);
